@@ -12,6 +12,7 @@ export function createCharacterCard(data) {
    data.map((character) => {
       const { name, status, type = '', episode, image } = character;
       const newCard = document.createElement('li');
+      newCard.classList.add('card');
       newCard.innerHTML = `
       <div class="card__image-container">
        <img
