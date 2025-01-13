@@ -1,5 +1,7 @@
 import { createCharacterCard } from './components/CharacterCard/CharacterCard.js';
 
+const cardContainer = document.querySelector('[data-js="card-container"]');
+
 const searchBarContainer = document.querySelector(
    '[data-js="search-bar-container"]'
 );
@@ -12,19 +14,18 @@ const prevButton = document.querySelector('[data-js="button-prev"]');
 const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
 
-const URL = 'https://rickandmortyapi.com/api/character';
+// const URL = 'https://rickandmortyapi.com/api/character';
 
 // States
-const maxPage = 42; //!! to make it dynamic!
+let maxPage = '';
 let page = 1;
-const searchQuery = '';
+let searchQuery = '';
 
 async function fetchCharacters(page) {
    pagination.textContent = `${page} / ${maxPage}`;
-   console.log(page);
    try {
       const response = await fetch(
-         `https://rickandmortyapi.com/api/character?page=${page}`
+         `https://rickandmortyapi.com/api/character?page=${page}&name=${searchQuery}`
       );
       const data = await response.json();
 
@@ -32,7 +33,8 @@ async function fetchCharacters(page) {
          console.log('Something went wrong...!');
       }
 
-      const maxPages = data.info.pages;
+      maxPage = data.info.pages;
+      pagination.textContent = `${page} / ${maxPage}`;
 
       return data.results;
    } catch (error) {
@@ -40,15 +42,25 @@ async function fetchCharacters(page) {
    }
 }
 
-const chars = await fetchCharacters(page);
-createCharacterCard(chars);
+async function render() {
+   cardContainer.innerHTML = '';
+   const chars = await fetchCharacters(page);
+   chars.map((char) => {
+      createCharacterCard(char);
+   });
+}
+
+render();
+
+// createCharacterCard(chars);
 
 nextButton.addEventListener('click', async () => {
    if (page <= maxPage - 1) {
       page++;
       pagination.textContent = `${page} / ${maxPage}`;
-      const chars = await fetchCharacters(page);
-      createCharacterCard(chars);
+      // const chars = await fetchCharacters(page);
+      // createCharacterCard(chars);
+      render();
    } else {
       return;
    }
@@ -58,9 +70,19 @@ prevButton.addEventListener('click', async () => {
    if (page > 1) {
       page--;
       pagination.textContent = `${page} / ${maxPage}`;
-      const chars = await fetchCharacters(page);
-      createCharacterCard(chars);
+      // const chars = await fetchCharacters(page);
+      // createCharacterCard(chars);
+      render();
    } else {
       return;
    }
+});
+
+searchBar.addEventListener('submit', (e) => {
+   e.preventDefault();
+   const formData = new FormData(e.target);
+   const data = Object.fromEntries(formData);
+   searchQuery = data.query;
+   page = 1;
+   render();
 });
