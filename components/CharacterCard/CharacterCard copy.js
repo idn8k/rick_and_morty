@@ -8,10 +8,12 @@ const cardContainer = document.querySelector('[data-js="card-container"]');
 // };
 
 export function createCharacterCard(data) {
-   const { name, status, type = '', episode, image } = data;
-   const newCard = document.createElement('li');
-   newCard.classList.add('card');
-   newCard.innerHTML = `
+   cardContainer.innerHTML = '';
+   data.map((character) => {
+      const { name, status, type = '', episode, image } = character;
+      const newCard = document.createElement('li');
+      newCard.classList.add('card');
+      newCard.innerHTML = `
       <div class="card__image-container">
        <img
          class="card__image"
@@ -32,7 +34,8 @@ export function createCharacterCard(data) {
      </dl>
    </div>`;
 
-   cardContainer.append(newCard);
+      cardContainer.append(newCard);
+   });
 }
 
 //--original:
