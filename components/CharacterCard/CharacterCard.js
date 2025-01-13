@@ -8,7 +8,7 @@ const cardContainer = document.querySelector('[data-js="card-container"]');
 // };
 
 export function createCharacterCard(data) {
-   console.log(data);
+   cardContainer.innerHTML = '';
    data.map((character) => {
       const { name, status, type = '', episode, image } = character;
       const newCard = document.createElement('li');
