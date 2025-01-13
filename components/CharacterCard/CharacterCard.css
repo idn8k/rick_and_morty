@@ -1,25 +1,33 @@
 .card-container {
-  margin-bottom: 10px;
+   margin-bottom: 10px;
+   padding: 1rem 1rem;
+   display: flex;
+   gap: 2rem;
+   flex-wrap: wrap;
+   justify-content: center;
 }
 .card {
-  width: 300px;
-  background-color: var(--color-secondary);
+   width: 300px;
+   background-color: var(--color-secondary);
+   border-radius: 20px;
+   overflow: hidden;
+   box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.3);
 }
 
 .card__info {
-  display: grid;
-  grid-template-columns: auto 1fr;
+   display: grid;
+   grid-template-columns: auto 1fr;
 }
 .card__content {
-  padding: 10px 20px 20px;
-  display: grid;
-  gap: 20px;
+   padding: 10px 20px 20px;
+   display: grid;
+   gap: 20px;
 }
 
 .card__info-description {
-  text-align: right;
+   text-align: right;
 }
 
 li {
-  list-style: none;
+   list-style: none;
 }

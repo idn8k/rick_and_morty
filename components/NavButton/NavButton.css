@@ -1,7 +1,10 @@
 .button {
-  border: none;
+   border: none;
+   padding: 8px 5rem;
+   border-radius: 7px;
+   text-align: center;
 }
 
 .button:hover {
-  background-color: var(--color-secondary);
+   background-color: var(--color-secondary);
 }
