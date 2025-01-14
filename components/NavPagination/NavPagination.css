@@ -1,14 +1,12 @@
 .navigation {
-   display: flex;
-   justify-content: center;
-   align-items: center;
    width: 90%;
    height: 30px;
-   display: grid;
    grid-template-columns: 100px 100px 100px;
    margin: 0 auto 2rem auto;
    padding: 2rem 20%;
-   justify-content: space-between;
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
 }
 
 .navigation__pagination {
